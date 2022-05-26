@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
-import org.springframework.web.client.getForObject
 import java.util.*
 
 
@@ -20,34 +19,42 @@ class UserService @Autowired constructor(
 
     fun post(user: UserEntity): UserEntity = repository.save(user)
 
-    fun updateUser( user: UserEntity): UserEntity = repository.save(user)
+    fun updateUser(user: UserEntity): UserEntity = repository.save(user)
 
     fun deleteUser(id: Long) = repository.deleteById(id)
     fun getUserWithComments(userId: Long): UserAndCommentResponse {
         val user = repository.findById(userId).get()
-        val comments = restTemplate.getForObject("http://localhost:9001/comment/commentsOfUser/" + user.id,Comments::class.java) ?: Comments(
-            emptyList()
-        )
+        val comments =
+            restTemplate.getForObject("http://localhost:9001/comment/commentsOfUser/" + user.id, Comments::class.java)
+                ?: Comments(
+                    emptyList()
+                )
         return UserAndCommentResponse(user, comments)
     }
 
     fun getUserWithArticles(userId: Long): UserAndArticleResponse {
         val user = repository.findById(userId).get()
-        val articles = restTemplate.getForObject("http://localhost:9001/article/articlesOf/" + user.id,Articles::class.java) ?: Articles(
-            emptyList()
-        )
+        val articles =
+            restTemplate.getForObject("http://localhost:9001/article/articlesOf/" + user.id, Articles::class.java)
+                ?: Articles(
+                    emptyList()
+                )
         return UserAndArticleResponse(user, articles)
     }
 
     fun getUserWithArticlesAndComments(userId: Long): UserWithCommentsAndArticles {
         val user = repository.findById(userId).get()
-        val articles = restTemplate.getForObject("http://localhost:9001/article/articlesOf/" + user.id,Articles::class.java) ?: Articles(
-            emptyList()
-        )
-        val comments = restTemplate.getForObject("http://localhost:9001/comment/commentsof/" + user.id,Comments::class.java) ?: Comments(
-            emptyList()
-        )
-        return UserWithCommentsAndArticles(user, comments,articles)
+        val articles =
+            restTemplate.getForObject("http://localhost:9001/article/articlesOf/" + user.id, Articles::class.java)
+                ?: Articles(
+                    emptyList()
+                )
+        val comments =
+            restTemplate.getForObject("http://localhost:9001/comment/commentsof/" + user.id, Comments::class.java)
+                ?: Comments(
+                    emptyList()
+                )
+        return UserWithCommentsAndArticles(user, comments, articles)
     }
 
 //    fun getUserWithArticlesAndComments(userId: Long): UserWithCommentAndArticle {
