@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.*
 import java.util.*
 
 @RestController
-@RequestMapping("comment")
+@RequestMapping("comment/")
 @Slf4j
 class CommentController(@Autowired val service: CommentService) {
 
-    @GetMapping("/")
+    @GetMapping
     fun getMain(model: Model): String {
         model["title"] = "salam sag"
         return "sag"
@@ -27,10 +27,10 @@ class CommentController(@Autowired val service: CommentService) {
     fun idNotFound(e: NoSuchElementException): ResponseEntity<String> = ResponseEntity(e.message, HttpStatus.NOT_FOUND)
 
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     fun getComment(@PathVariable id: Long): Optional<Comment> = service.getComment(id)
 
-    @GetMapping("/commentsof/{id}")
+    @GetMapping("commentsof/{id}")
     fun getComments(@PathVariable id: Long): Comments = service.getComments(id)
 
     @PostMapping
@@ -40,7 +40,7 @@ class CommentController(@Autowired val service: CommentService) {
     @PatchMapping
     fun updateComment(@RequestBody comment: Comment):Comment = service.updateComment(1,comment)
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteComment(@PathVariable id: Long) :Unit= service.deleteComment(id)
 

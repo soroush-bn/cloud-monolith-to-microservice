@@ -15,11 +15,11 @@ import java.util.*
 
 
 @RestController
-@RequestMapping("user   ")
+@RequestMapping("user/")
 @Slf4j
 class UserController(@Autowired val service: UserService) {
 
-    @GetMapping("/")
+    @GetMapping
     fun getMain(model: Model): String {
         model["title"] = "salam sag"
         return "sag"
@@ -39,11 +39,11 @@ class UserController(@Autowired val service: UserService) {
     @PatchMapping
     fun updateUser(@RequestBody user: UserEntity): UserEntity = service.updateUser(1, user)
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteUser(@PathVariable id: Long): Unit = service.deleteUser(id)
 
-        @GetMapping("/userwithcomments/{id}")
+        @GetMapping("userwithcomments/{id}")
     fun getUserWithComments(@PathVariable("id") userId:Long): UserAndCommentResponse =service.getUserWithComment(userId)
 
 //    @GetMapping("userwitharticle/{id}")
