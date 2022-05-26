@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
+import org.springframework.web.client.getForObject
 import java.util.*
 
 
@@ -48,7 +49,7 @@ class UserService @Autowired constructor(
         val comments = restTemplate.getForObject("http://localhost:9001/comment/commentsOfUser/" + user.id) ?: Comments(
             emptyList()
         )
-        return UserWithCommentsAndArticles(user, comments,articles)
+        return UserWithCommentsAndArticles(user, comments, articles)
     }
 
 //    fun getUserWithArticlesAndComments(userId: Long): UserWithCommentAndArticle {
