@@ -25,7 +25,7 @@ class UserService @Autowired constructor(
     fun deleteUser(id: Long) = repository.deleteById(id)
     fun getUserWithComments(userId: Long): UserAndCommentResponse {
         val user = repository.findById(userId).get()
-        val comments = restTemplate.getForObject("http://localhost:9001/comment/commentsof/" + user.id) ?: Comments(
+        val comments = restTemplate.getForObject("http://localhost:9001/comment/commentsOfUser/" + user.id,Comments::class.java) ?: Comments(
             emptyList()
         )
         return UserAndCommentResponse(user, comments)
@@ -33,7 +33,7 @@ class UserService @Autowired constructor(
 
     fun getUserWithArticles(userId: Long): UserAndArticleResponse {
         val user = repository.findById(userId).get()
-        val articles = restTemplate.getForObject("http://localhost:9001/article/articlesOf/" + user.id) ?: Articles(
+        val articles = restTemplate.getForObject("http://localhost:9001/article/articlesOf/" + user.id,Articles::class.java) ?: Articles(
             emptyList()
         )
         return UserAndArticleResponse(user, articles)
@@ -41,10 +41,10 @@ class UserService @Autowired constructor(
 
     fun getUserWithArticlesAndComments(userId: Long): UserWithCommentsAndArticles {
         val user = repository.findById(userId).get()
-        val articles = restTemplate.getForObject("http://localhost:9001/article/articlesOf/" + user.id) ?: Articles(
+        val articles = restTemplate.getForObject("http://localhost:9001/article/articlesOf/" + user.id,Articles::class.java) ?: Articles(
             emptyList()
         )
-        val comments = restTemplate.getForObject("http://localhost:9001/comment/commentsof/" + user.id) ?: Comments(
+        val comments = restTemplate.getForObject("http://localhost:9001/comment/commentsof/" + user.id,Comments::class.java) ?: Comments(
             emptyList()
         )
         return UserWithCommentsAndArticles(user, comments,articles)
