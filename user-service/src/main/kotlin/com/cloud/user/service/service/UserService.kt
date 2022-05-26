@@ -20,7 +20,7 @@ class UserService @Autowired constructor(
 
     fun post(user: UserEntity): UserEntity = repository.save(user)
 
-    fun updateUser(i: Int, user: UserEntity): UserEntity = repository.save(user)
+    fun updateUser( user: UserEntity): UserEntity = repository.save(user)
 
     fun deleteUser(id: Long) = repository.deleteById(id)
     fun getUserWithComments(userId: Long): UserAndCommentResponse {

@@ -37,7 +37,7 @@ class UserController(@Autowired val service: UserService) {
     fun postUser(@RequestBody user: UserEntity): UserEntity = service.post(user)
 
     @PatchMapping
-    fun updateUser(@RequestBody user: UserEntity): UserEntity = service.updateUser(1, user)
+    fun updateUser(@RequestBody user: UserEntity): UserEntity = service.updateUser(user)
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
