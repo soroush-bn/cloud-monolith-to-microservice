@@ -30,8 +30,10 @@ class CommentController(@Autowired val service: CommentService) {
     @GetMapping("{id}")
     fun getComment(@PathVariable id: Long): Optional<Comment> = service.getComment(id)
 
-    @GetMapping("commentsof/{id}")
-    fun getComments(@PathVariable id: Long): Comments = service.getComments(id)
+    @GetMapping("commentsOfUser/{id}")
+    fun getCommentsOfUser(@PathVariable id: Long): Comments = service.getCommentsOfUser(id)
+    @GetMapping("commentsOfArticle/{id}")
+    fun getCommentsOfArticle(@PathVariable id: Long): Comments = service.getCommentsOfArticle(id)
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)

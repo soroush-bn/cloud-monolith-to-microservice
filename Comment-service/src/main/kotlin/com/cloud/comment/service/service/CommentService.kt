@@ -11,12 +11,19 @@ import java.util.*
 @Service
 class CommentService(@Autowired val repository: CommentRepository) {
     fun getComment(id: Long): Optional<Comment> = repository.findById(id)
-    fun getComments(userId: Long): Comments {
+    fun getCommentsOfUser(userId: Long): Comments {
 
         val commentlist = repository.findAllByUserId(userId)
         return Comments(commentlist)
 
     }
+    fun getCommentsOfArticle(articleId: Long): Comments {
+
+        val commentlist = repository.findAllByArticleId(articleId)
+        return Comments(commentlist)
+
+    }
+
 
     fun post(comment: Comment): Comment = repository.save(comment)
 
