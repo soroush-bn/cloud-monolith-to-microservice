@@ -1,8 +1,9 @@
 package com.cloud.user.service.controller
 
 import com.cloud.user.service.entity.UserEntity
+import com.cloud.user.service.model.UserAndArticleResponse
 import com.cloud.user.service.model.UserAndCommentResponse
-import com.cloud.user.service.model.UserWithCommentAndArticle
+import com.cloud.user.service.model.UserWithCommentsAndArticles
 import com.cloud.user.service.service.UserService
 import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
@@ -11,7 +12,6 @@ import org.springframework.http.ResponseEntity
 import org.springframework.ui.Model
 import org.springframework.ui.set
 import org.springframework.web.bind.annotation.*
-import java.util.*
 
 
 @RestController
@@ -43,8 +43,17 @@ class UserController(@Autowired val service: UserService) {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteUser(@PathVariable id: Long): Unit = service.deleteUser(id)
 
-        @GetMapping("userwithcomments/{id}")
-    fun getUserWithComments(@PathVariable("id") userId:Long): UserAndCommentResponse =service.getUserWithComment(userId)
+    @GetMapping("userwithcomments/{id}")
+    fun getUserWithComments(@PathVariable("id") userId: Long): UserAndCommentResponse =
+        service.getUserWithComments(userId)
+
+    @GetMapping("userWithArticles/{id}")
+    fun getUserWithArticles(@PathVariable("id") userId: Long): UserAndArticleResponse =
+        service.getUserWithArticles(userId)
+
+    @GetMapping("userWithArticlesAndComments/{id}")
+    fun getUserWithArticlesAndComments(@PathVariable("id") userId: Long): UserWithCommentsAndArticles =
+        service.getUserWithArticlesAndComments(userId)
 
 //    @GetMapping("userwitharticle/{id}")
 //    fun getUserWithArticleAndComment(@PathVariable("id") userId:Long) : UserWithCommentAndArticle=
