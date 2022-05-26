@@ -17,6 +17,7 @@ class CommentService(@Autowired val repository: CommentRepository) {
         return Comments(commentlist)
 
     }
+
     fun getCommentsOfArticle(articleId: Long): Comments {
 
         val commentlist = repository.findAllByArticleId(articleId)

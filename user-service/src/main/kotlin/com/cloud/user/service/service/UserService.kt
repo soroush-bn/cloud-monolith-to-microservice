@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
-import org.springframework.web.client.getForObject
 import java.util.*
 
 
@@ -20,14 +19,16 @@ class UserService @Autowired constructor(
 
     fun post(user: UserEntity): UserEntity = repository.save(user)
 
-    fun updateUser( user: UserEntity): UserEntity = repository.save(user)
+    fun updateUser(user: UserEntity): UserEntity = repository.save(user)
 
     fun deleteUser(id: Long) = repository.deleteById(id)
     fun getUserWithComments(userId: Long): UserAndCommentResponse {
         val user = repository.findById(userId).get()
-        val comments = restTemplate.getForObject("http://localhost:9001/comment/commentsOfUser/" + user.id) ?: Comments(
-            emptyList()
-        )
+        val comments =
+            restTemplate.getForObject("http://localhost:9001/comment/commentsOfUser/" + user.id, Comments::class.java)
+                ?: Comments(
+                    emptyList()
+                )
         return UserAndCommentResponse(user, comments)
     }
 
