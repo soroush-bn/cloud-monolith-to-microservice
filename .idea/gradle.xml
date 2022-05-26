@@ -5,7 +5,7 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/Comment-service" />
-        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="gradleJvm" value="temurin-17" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/Comment-service" />
@@ -14,18 +14,18 @@
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$/gateway" />
-        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$/article-service" />
+        <option name="gradleJvm" value="temurin-17" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/gateway" />
+            <option value="$PROJECT_DIR$/article-service" />
           </set>
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/service-registery" />
-        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="gradleJvm" value="temurin-17" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/service-registery" />
@@ -35,7 +35,7 @@
       <GradleProjectSettings>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$/user-service" />
-        <option name="gradleJvm" value="#JAVA_HOME" />
+        <option name="gradleJvm" value="temurin-17" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$/user-service" />

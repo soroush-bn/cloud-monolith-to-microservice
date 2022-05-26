@@ -32,6 +32,7 @@ class CommentController(@Autowired val service: CommentService) {
 
     @GetMapping("commentsOfUser/{id}")
     fun getCommentsOfUser(@PathVariable id: Long): Comments = service.getCommentsOfUser(id)
+
     @GetMapping("commentsOfArticle/{id}")
     fun getCommentsOfArticle(@PathVariable id: Long): Comments = service.getCommentsOfArticle(id)
 
@@ -40,10 +41,10 @@ class CommentController(@Autowired val service: CommentService) {
     fun postComment(@RequestBody comment: Comment): Comment = service.post(comment)
 
     @PatchMapping
-    fun updateComment(@RequestBody comment: Comment):Comment = service.updateComment(1,comment)
+    fun updateComment(@RequestBody comment: Comment): Comment = service.updateComment(1, comment)
 
     @DeleteMapping("{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteComment(@PathVariable id: Long) :Unit= service.deleteComment(id)
+    fun deleteComment(@PathVariable id: Long): Unit = service.deleteComment(id)
 
 }
