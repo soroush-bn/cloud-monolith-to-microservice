@@ -26,6 +26,7 @@ repositories {
 extra["springCloudVersion"] = "2021.0.3-SNAPSHOT"
 
 dependencies {
+	implementation("io.jsonwebtoken:jjwt:0.9.1")
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
