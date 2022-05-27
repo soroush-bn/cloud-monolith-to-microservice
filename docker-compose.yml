@@ -1,0 +1,35 @@
+version: '1'
+services:
+  article-service:
+    container_name: article-service
+    build:
+      context: docker-article-service
+      dockerfile: Dockerfile
+    image: article-service:latest
+    ports:
+      - 19000:9000
+    networks:
+      - spring-cloud-network
+  user-service:
+    container_name: user-service
+    build:
+      context: docker-user-service
+      dockerfile: Dockerfile
+    image: user-service:latest
+    ports:
+      - 19001:9001
+    networks:
+      - spring-cloud-network
+  coment-service:
+    container_name: coment-service
+    build:
+      context: docker-coment-service
+      dockerfile: Dockerfile
+    image: coment-service:latest
+    ports:
+      - 19002:9002
+    networks:
+      - spring-cloud-network
+networks:
+  spring-cloud-network:
+    driver: bridge
