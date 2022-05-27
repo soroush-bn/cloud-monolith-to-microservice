@@ -3,6 +3,7 @@ package com.cloud.user.service.service
 import com.cloud.user.service.entity.UserEntity
 import com.cloud.user.service.model.*
 import com.cloud.user.service.repository.UserRepository
+import com.cloud.user.service.utils.JwtUtil
 import lombok.extern.slf4j.Slf4j
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -14,7 +15,7 @@ import java.util.*
 @Service
 @Slf4j
 class UserService @Autowired constructor(
-    private val repository: UserRepository, private val restTemplate: RestTemplate
+    private val repository: UserRepository, private val restTemplate: RestTemplate, val jwtUtil:JwtUtil
 ) {
     fun getUser(id: Long): Optional<UserEntity> = repository.findById(id)
 
@@ -50,6 +51,10 @@ class UserService @Autowired constructor(
             emptyList()
         )
         return UserWithCommentsAndArticles(user, comments, articles)
+    }
+
+    fun login(userName: String?): String? {
+        return jwtUtil.generateToken(userName);
     }
 
 //    fun getUserWithArticlesAndComments(userId: Long): UserWithCommentAndArticle {

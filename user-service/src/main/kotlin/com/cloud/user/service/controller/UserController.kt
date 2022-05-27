@@ -25,6 +25,12 @@ class UserController(@Autowired val service: UserService) {
         return "sag"
     }
 
+    @PostMapping("/login")
+    fun login(@RequestBody userName: String?): String? {
+        return service.login(userName)
+    }
+
+
     @ExceptionHandler(NoSuchElementException::class)
     fun idNotFound(e: NoSuchElementException): ResponseEntity<String> = ResponseEntity(e.message, HttpStatus.NOT_FOUND)
 
