@@ -9,15 +9,21 @@ spring:
       routes:
         - id: USER-SERVICE
           uri: lb://USER-SERVICE
+          filters:
+            - JwtAuthenticationFilter
           predicates:
             - Path=/user/**
         - id: COMMENT-SERVICE
           uri: lb://COMMENT-SERVICE
+          filters:
+            - JwtAuthenticationFilter
           predicates:
             - Path=/comment/**
         - id: ARTICLE-SERVICE
           uri:
             lb://ARTICLE-SERVICE
+          filters:
+            - JwtAuthenticationFilter
           predicates:
             - Path=/article/**
 
