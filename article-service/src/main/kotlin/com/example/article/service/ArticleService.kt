@@ -35,6 +35,7 @@ class ArticleService(
         val comments = restTemplate.getForObject("http://localhost:9001/comment/commentsOfArticle/" + article.articleId)
             ?: Comments(
                 emptyList()
+
             )
 
         return ArticleWithComments(article = article, comments = comments)
