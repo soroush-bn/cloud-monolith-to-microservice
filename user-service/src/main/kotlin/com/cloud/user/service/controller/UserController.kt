@@ -3,6 +3,7 @@ package com.cloud.user.service.controller
 import com.cloud.user.service.entity.UserEntity
 import com.cloud.user.service.model.UserAndArticleResponse
 import com.cloud.user.service.model.UserAndCommentResponse
+import com.cloud.user.service.model.UserLogin
 import com.cloud.user.service.model.UserWithCommentsAndArticles
 import com.cloud.user.service.service.UserService
 import lombok.extern.slf4j.Slf4j
@@ -25,22 +26,14 @@ class UserController(@Autowired val service: UserService) {
         return "sag"
     }
 
-    @PostMapping("/login")
-    fun login(@RequestBody userName: String?): String? {
-        return service.login(userName)
-    }
-
-
-    @ExceptionHandler(NoSuchElementException::class)
-    fun idNotFound(e: NoSuchElementException): ResponseEntity<String> = ResponseEntity(e.message, HttpStatus.NOT_FOUND)
-
-
-//    @GetMapping("/{id}")
-//    fun getUser(@PathVariable id: Long): Optional<UserEntity> = service.getUser(id)
-
-    @PostMapping
+    @PostMapping("register")
     @ResponseStatus(HttpStatus.CREATED)
-    fun postUser(@RequestBody user: UserEntity): UserEntity = service.post(user)
+    fun postUser(@RequestBody user: UserEntity): UserEntity = service.register(user)
+
+    @PostMapping("login")
+    fun login(@RequestBody userLogin: UserLogin): String {
+        return service.login(userLogin)
+    }
 
     @PatchMapping
     fun updateUser(@RequestBody user: UserEntity): UserEntity = service.updateUser(user)
@@ -49,7 +42,7 @@ class UserController(@Autowired val service: UserService) {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun deleteUser(@PathVariable id: Long): Unit = service.deleteUser(id)
 
-    @GetMapping("userwithcomments/{id}")
+    @GetMapping("userWithComments/{id}")
     fun getUserWithComments(@PathVariable("id") userId: Long): UserAndCommentResponse =
         service.getUserWithComments(userId)
 
@@ -61,9 +54,7 @@ class UserController(@Autowired val service: UserService) {
     fun getUserWithArticlesAndComments(@PathVariable("id") userId: Long): UserWithCommentsAndArticles =
         service.getUserWithArticlesAndComments(userId)
 
-//    @GetMapping("userwitharticle/{id}")
-//    fun getUserWithArticleAndComment(@PathVariable("id") userId:Long) : UserWithCommentAndArticle=
-//        service.getUserWithArticleAndComment(userId)
-
+    @ExceptionHandler(NoSuchElementException::class)
+    fun idNotFound(e: NoSuchElementException): ResponseEntity<String> = ResponseEntity(e.message, HttpStatus.NOT_FOUND)
 
 }

@@ -4,26 +4,30 @@ import com.cloud.user.service.entity.UserEntity
 import com.cloud.user.service.model.*
 import com.cloud.user.service.repository.UserRepository
 import com.cloud.user.service.utils.JwtUtil
-import lombok.extern.slf4j.Slf4j
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.client.getForObject
-import java.util.*
 
 
 @Service
-@Slf4j
-class UserService @Autowired constructor(
-    private val repository: UserRepository, private val restTemplate: RestTemplate, val jwtUtil:JwtUtil
+class UserService constructor(
+    private val repository: UserRepository, private val restTemplate: RestTemplate, private val jwtUtil: JwtUtil
 ) {
-    fun getUser(id: Long): Optional<UserEntity> = repository.findById(id)
 
-    fun post(user: UserEntity): UserEntity = repository.save(user)
+    fun register(user: UserEntity): UserEntity {
+        user.token = jwtUtil.generateToken(user.id.toString())
+        return repository.save(user)
+    }
+
+    fun login(userLogin: UserLogin): String {
+        // todo check password if valid generate token then return token
+        return jwtUtil.generateToken(userLogin.username)
+    }
 
     fun updateUser(user: UserEntity): UserEntity = repository.save(user)
 
     fun deleteUser(id: Long) = repository.deleteById(id)
+
     fun getUserWithComments(userId: Long): UserAndCommentResponse {
         val user = repository.findById(userId).get()
         val comments =
@@ -53,15 +57,5 @@ class UserService @Autowired constructor(
         return UserWithCommentsAndArticles(user, comments, articles)
     }
 
-    fun login(userName: String?): String? {
-        return jwtUtil.generateToken(userName);
-    }
 
-//    fun getUserWithArticlesAndComments(userId: Long): UserWithCommentAndArticle {
-//        val user = repository.findById(userId).get()
-////        val comments = restTemplate.getForObject("http://localhost:9001/comments/"+user.id, ParameterizedTypeReference<List<Comment>>::class.java)?: Comment()
-//
-////        return UserAndCommentResponse(user, comment)
-//
-//    }
 }

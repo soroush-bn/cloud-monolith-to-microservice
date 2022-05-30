@@ -1,6 +1,7 @@
-package com.cloud.user.service.exceptions
+package com.cloud.gateway.jwt
 
 import javax.naming.AuthenticationException
+
 
 class JwtTokenMissingException(msg: String?) : AuthenticationException(msg) {
     companion object {

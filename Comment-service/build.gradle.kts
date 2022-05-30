@@ -40,6 +40,7 @@ dependencies {
 	implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
 	implementation("org.springframework.cloud:spring-cloud-starter-config")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
+    implementation("org.springdoc:springdoc-openapi-ui:1.6.8")
 }
 extra["springCloudVersion"] = "2021.0.3-SNAPSHOT"
 dependencyManagement {
