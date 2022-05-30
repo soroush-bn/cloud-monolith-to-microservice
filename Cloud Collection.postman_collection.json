@@ -37,7 +37,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\":\"email\",\r\n    \"username\":\"sag\",\r\n    \"bio\":\"nedeeeee\"\r\n\r\n}",
+							"raw": "{\r\n    \"email\":\"email\",\r\n    \"username\":\"salam\",\r\n    \"bio\":\"nedeeeee\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -203,7 +203,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n\"body\": \" sag berine beeee 2\",\r\n\"userId\" : 1\r\n\r\n}",
+							"raw": "{\r\n\"body\": \" salam beeee 2\",\r\n\"userId\" : 1\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
