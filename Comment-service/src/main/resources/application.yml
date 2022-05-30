@@ -8,6 +8,14 @@ spring:
   cloud:
     config:
       enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/db_comment
+    username: springuser
+    password: ThePassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
 eureka:
   client:

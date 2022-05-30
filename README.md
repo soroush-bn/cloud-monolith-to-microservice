@@ -93,10 +93,40 @@ user: UserHandler.kt, ProfileHandler.kt, UserRepository.kt, User.kt
 
 ![photo1650650248](https://user-images.githubusercontent.com/45733433/164769225-b8bf0f4a-440b-41fd-8242-05dc672b82f2.jpeg)
 
-
- 
-
 ### team plan for developing each service
+
 #### UserService -> @sadeghAbedi
+
 #### CommentService -> @soroush.baghernezhad
+
 #### ArticleService -> @Alireza.dehghan
+
+### database configuration
+
+run mysql server
+
+run below commands to create needed databases :
+
+    create database db_comment;
+    create database db_article;
+    create database db_user;
+
+run below commands to create user springuser with password ThePassword :
+
+    create user 'springuser'@'%' identified by 'ThePassword';
+
+run below commands to give all privileges to newly created user:
+
+    grant all on db_comment.* to 'springuser'@'%';
+    grant all on db_article.* to 'springuser'@'%';
+    grant all on db_user.* to 'springuser'@'%';
+
+to show databases :
+
+    show databases;
+
+to select a database:
+
+    use databasName
+
+
