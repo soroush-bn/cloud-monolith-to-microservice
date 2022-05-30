@@ -32,10 +32,11 @@ class ArticleService(
 
     fun getArticleWithComments(id: Long): ArticleWithComments {
         val article = articleRepository.findByArticleId(id)
-        val comments = restTemplate.getForObject("http://localhost:9001/comment/commentsOfArticle/" + article.articleId)
-            ?: Comments(
-                emptyList()
-            )
+        val comments =
+            restTemplate.getForObject("http://COMMENT-SERVICE/comment/commentsOfArticle/" + article.articleId)
+                ?: Comments(
+                    emptyList()
+                )
 
         return ArticleWithComments(article = article, comments = comments)
     }

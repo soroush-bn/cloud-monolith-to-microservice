@@ -11,7 +11,7 @@ spring:
     hibernate:
       ddl-auto: update
   datasource:
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/db_article
+    url: jdbc:mysql://article-db:3306/db_article
     username: springuser
     password: ThePassword
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -20,6 +20,6 @@ eureka:
     register-with-eureka: true
     fetch-registry: true
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://service-registry:8761/eureka/
   instance:
     hostname: localhost

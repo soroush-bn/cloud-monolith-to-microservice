@@ -1,35 +1,92 @@
-version: '1'
+version: '3'
 services:
+
+  # ARTICLE SERVICE ----------------------------------
   article-service:
     container_name: article-service
-    build:
-      context: docker-article-service
-      dockerfile: Dockerfile
-    image: article-service:latest
+    image: article-service:0.0.1-SNAPSHOT
     ports:
-      - 19000:9000
+      - "9003:9003"
     networks:
       - spring-cloud-network
+    depends_on:
+      - article-db
+      - service-registry
+
+  article-db:
+    image: mysql:oracle
+    networks:
+      - spring-cloud-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=1111
+      - MYSQL_DATABASE=db_article
+      - MYSQL_USER=springuser
+      - MYSQL_PASSWORD=ThePassword
+
+  # USER SERVICE ----------------------------------
   user-service:
     container_name: user-service
-    build:
-      context: docker-user-service
-      dockerfile: Dockerfile
-    image: user-service:latest
+    image: user-service:0.0.1-SNAPSHOT
     ports:
-      - 19001:9001
+      - "9002:9002"
     networks:
       - spring-cloud-network
-  coment-service:
-    container_name: coment-service
-    build:
-      context: docker-coment-service
-      dockerfile: Dockerfile
-    image: coment-service:latest
-    ports:
-      - 19002:9002
+    depends_on:
+      - user-db
+      - service-registry
+
+  user-db:
+    image: mysql:oracle
     networks:
       - spring-cloud-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=1111
+      - MYSQL_DATABASE=db_user
+      - MYSQL_USER=springuser
+      - MYSQL_PASSWORD=ThePassword
+
+  # COMMENT SERVICE ----------------------------------
+  comment-service:
+    container_name: comment-service
+    image: comment-service:0.0.1-SNAPSHOT
+    ports:
+      - "9001:9001"
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - comment-db
+      - service-registry
+
+  comment-db:
+    image: mysql:oracle
+    networks:
+      - spring-cloud-network
+    environment:
+      - MYSQL_ROOT_PASSWORD=1111
+      - MYSQL_DATABASE=db_comment
+      - MYSQL_USER=springuser
+      - MYSQL_PASSWORD=ThePassword
+
+  # SERVICE REGISTRY ----------------------------------
+  service-registry:
+    container_name: service-registry
+    image: service-registery:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+    networks:
+      - spring-cloud-network
+
+  # GATEWAY ----------------------------------
+  gateway:
+    container_name: gateway
+    image: gateway:0.0.1-SNAPSHOT
+    ports:
+      - "9191:9191"
+    networks:
+      - spring-cloud-network
+    depends_on:
+      - service-registry
+
 networks:
   spring-cloud-network:
     driver: bridge
