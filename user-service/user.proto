@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.cloud.user.service.service";
+option java_outer_classname = "userProto";
+
+package user.service ;
+
+service Blog {
+  rpc GetArticleOfUser (UserId) returns (stream Article) {}
+  rpc GetCommentsOfUser(UserId) returns (stream Comment){}
+  rpc GetCommentsOfArticle(ArticleId) returns(stream Comment){}
+}
+
+// The request article containing the user's id.
+message  UserId{
+  float id = 1;
+}
+
+message  ArticleId{
+  float id = 1;
+}
+message Article{
+  string slug = 1;
+  string title = 2;
+  string description = 3;
+  string body = 4;
+  float userId = 5;
+  string createdAt = 6;
+  string updatedAt = 7;
+  float articleId = 8;
+}
+
+message Comment{
+  string createdAt = 1;
+  string updatedAt = 2;
+  string body = 3;
+  float userId = 4;
+  float articleId = 5;
+  float id = 6;
+}
