@@ -18,7 +18,7 @@ class GatewayConfig(private val jwtAuthenticationFilter: JwtAuthenticationFilter
             "USER-SERVICE"
         ) { r: PredicateSpec ->
             r.path("/user/**")
-                .uri("lb://USER-SERVICE")
+                .uri("http://user-service:9002")
         }
             .route(
                 "COMMENT-SERVICE"
@@ -27,7 +27,7 @@ class GatewayConfig(private val jwtAuthenticationFilter: JwtAuthenticationFilter
                     f.filter(
                         jwtAuthenticationFilter
                     )
-                }.uri("lb://COMMENT-SERVICE")
+                }.uri("http://comment-service:9001")
             }
             .route(
                 "ARTICLE-SERVICE"
@@ -36,7 +36,9 @@ class GatewayConfig(private val jwtAuthenticationFilter: JwtAuthenticationFilter
                     f.filter(
                         jwtAuthenticationFilter
                     )
-                }.uri("lb://ARTICLE-SERVICE")
+                }.uri("http://article-service:9003")
             }.build()
     }
 }
+// use code below to run without docker
+//.uri("lb://USER-SERVICE")

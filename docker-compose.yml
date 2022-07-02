@@ -5,6 +5,7 @@ services:
   article-service:
     container_name: article-service
     image: article-service:0.0.1-SNAPSHOT
+    restart: always
     ports:
       - "9003:9003"
     networks:
@@ -13,8 +14,12 @@ services:
       - article-db
       - service-registry
 
+
+
   article-db:
+    container_name: article-db
     image: mysql:oracle
+    restart: always
     networks:
       - spring-cloud-network
     environment:
@@ -27,6 +32,7 @@ services:
   user-service:
     container_name: user-service
     image: user-service:0.0.1-SNAPSHOT
+    restart: always
     ports:
       - "9002:9002"
     networks:
@@ -36,7 +42,9 @@ services:
       - service-registry
 
   user-db:
+    container_name: user-db
     image: mysql:oracle
+    restart: always
     networks:
       - spring-cloud-network
     environment:
@@ -49,6 +57,7 @@ services:
   comment-service:
     container_name: comment-service
     image: comment-service:0.0.1-SNAPSHOT
+    restart: always
     ports:
       - "9001:9001"
     networks:
@@ -58,7 +67,9 @@ services:
       - service-registry
 
   comment-db:
+    container_name: comment-db
     image: mysql:oracle
+    restart: always
     networks:
       - spring-cloud-network
     environment:
@@ -71,6 +82,7 @@ services:
   service-registry:
     container_name: service-registry
     image: service-registery:0.0.1-SNAPSHOT
+    restart: always
     ports:
       - "8761:8761"
     networks:
@@ -80,6 +92,7 @@ services:
   gateway:
     container_name: gateway
     image: gateway:0.0.1-SNAPSHOT
+    restart: always
     ports:
       - "9191:9191"
     networks:
@@ -90,3 +103,4 @@ services:
 networks:
   spring-cloud-network:
     driver: bridge
+

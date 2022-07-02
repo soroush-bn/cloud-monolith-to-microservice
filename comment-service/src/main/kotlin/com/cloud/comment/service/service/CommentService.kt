@@ -13,15 +13,15 @@ class CommentService(@Autowired val repository: CommentRepository) {
     fun getComment(id: Long): Optional<Comment> = repository.findById(id)
     fun getCommentsOfUser(userId: Long): Comments {
 
-        val commentlist = repository.findAllByUserId(userId)
-        return Comments(commentlist)
+        val comments = repository.findAllByUserId(userId)
+        return Comments(comments)
 
     }
 
     fun getCommentsOfArticle(articleId: Long): Comments {
 
-        val commentlist = repository.findAllByArticleId(articleId)
-        return Comments(commentlist)
+        val comments = repository.findAllByArticleId(articleId)
+        return Comments(comments)
 
     }
 

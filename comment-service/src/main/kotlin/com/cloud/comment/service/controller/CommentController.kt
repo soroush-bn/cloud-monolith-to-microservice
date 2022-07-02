@@ -19,22 +19,22 @@ class CommentController(@Autowired val service: CommentService) {
 
     @GetMapping
     fun getMain(model: Model): String {
-        model["title"] = "salam sag"
-        return "sag"
+        model["title"] = "test"
+        return "test"
     }
 
     @ExceptionHandler(NoSuchElementException::class)
     fun idNotFound(e: NoSuchElementException): ResponseEntity<String> = ResponseEntity(e.message, HttpStatus.NOT_FOUND)
 
 
-    @GetMapping("{id}")
-    fun getComment(@PathVariable id: Long): Optional<Comment> = service.getComment(id)
+    @GetMapping("getComment")
+    fun getComment(@RequestParam(name = "id") id: Long): Optional<Comment> = service.getComment(id)
 
-    @GetMapping("commentsOfUser/{id}")
-    fun getCommentsOfUser(@PathVariable id: Long): Comments = service.getCommentsOfUser(id)
+    @GetMapping("commentsOfUser")
+    fun getCommentsOfUser(@RequestParam(name = "id") id: Long): Comments = service.getCommentsOfUser(id)
 
-    @GetMapping("commentsOfArticle/{id}")
-    fun getCommentsOfArticle(@PathVariable id: Long): Comments = service.getCommentsOfArticle(id)
+    @GetMapping("commentsOfArticle")
+    fun getCommentsOfArticle(@RequestParam(name = "id") id: Long): Comments = service.getCommentsOfArticle(id)
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
@@ -43,8 +43,8 @@ class CommentController(@Autowired val service: CommentService) {
     @PatchMapping
     fun updateComment(@RequestBody comment: Comment): Comment = service.updateComment(1, comment)
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteComment(@PathVariable id: Long): Unit = service.deleteComment(id)
+    fun deleteComment(@RequestParam(name = "id") id: Long): Unit = service.deleteComment(id)
 
 }

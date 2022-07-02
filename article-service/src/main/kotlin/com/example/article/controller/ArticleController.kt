@@ -4,6 +4,8 @@ import com.example.article.entity.Article
 import com.example.article.model.ArticleWithComments
 import com.example.article.model.Articles
 import com.example.article.service.ArticleService
+import org.springframework.ui.Model
+import org.springframework.ui.set
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -11,24 +13,32 @@ import org.springframework.web.bind.annotation.*
 class ArticleController(
     val articleService: ArticleService
 ) {
+
+    @GetMapping
+    fun getMain(model: Model): String {
+        model["title"] = "test"
+        return "test"
+    }
+
     @PostMapping
     fun saveArticle(@RequestBody article: Article): Article {
 
         return articleService.saveArticle(article)
     }
 
-    @GetMapping("{id}")
-    fun getArticle(@PathVariable("id") articleId: Long): Article {
+    @GetMapping("getArticle")
+    fun getArticle(@RequestParam(name = "id") articleId: Long): Article {
 
         return articleService.findArticleById(articleId)
     }
 
-    @GetMapping("articlesOfUser/{id}")
-    fun getArticlesOfUser(@PathVariable id: Long) : Articles = articleService.getArticlesOfUser(id)
+    @GetMapping("articlesOfUser")
+    fun getArticlesOfUser(@RequestParam(name = "id") id: Long): Articles = articleService.getArticlesOfUser(id)
 
 
-    @GetMapping("articleWithComments/{id}")
-    fun getArticleWithComments(@PathVariable id: Long) : ArticleWithComments = articleService.getArticleWithComments(id)
+    @GetMapping("articleWithComments")
+    fun getArticleWithComments(@RequestParam(name = "id") id: Long): ArticleWithComments =
+        articleService.getArticleWithComments(id)
 
 
 }
