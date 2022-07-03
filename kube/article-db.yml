@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: article-db-deployment
+  labels:
+    app: article-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: article-db
+  template:
+    metadata:
+      labels:
+        app: article-db
+    spec:
+      containers:
+        - name: article-db
+          image: mysql:oracle
+          ports:
+            - containerPort: 27017
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: root-password
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-configmap
+                  key: article-db
+            - name: MYSQL_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: username
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: password
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: article-db-service
+spec:
+  selector:
+    app: article-db
+  ports:
+    - protocol: TCP
+      port: 27017
+      targetPort: 27017
