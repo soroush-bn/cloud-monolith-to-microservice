@@ -5,11 +5,12 @@ services:
   article-service:
     container_name: article-service
     image: article-service:0.0.1-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://service-registry:8761/eureka
     restart: always
     ports:
       - "9003:9003"
-    networks:
-      - spring-cloud-network
     depends_on:
       - article-db
       - service-registry
@@ -20,8 +21,6 @@ services:
     container_name: article-db
     image: mysql:oracle
     restart: always
-    networks:
-      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=1111
       - MYSQL_DATABASE=db_article
@@ -32,11 +31,12 @@ services:
   user-service:
     container_name: user-service
     image: user-service:0.0.1-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://service-registry:8761/eureka
     restart: always
     ports:
       - "9002:9002"
-    networks:
-      - spring-cloud-network
     depends_on:
       - user-db
       - service-registry
@@ -45,8 +45,6 @@ services:
     container_name: user-db
     image: mysql:oracle
     restart: always
-    networks:
-      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=1111
       - MYSQL_DATABASE=db_user
@@ -57,11 +55,12 @@ services:
   comment-service:
     container_name: comment-service
     image: comment-service:0.0.1-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://service-registry:8761/eureka
     restart: always
     ports:
       - "9001:9001"
-    networks:
-      - spring-cloud-network
     depends_on:
       - comment-db
       - service-registry
@@ -70,8 +69,6 @@ services:
     container_name: comment-db
     image: mysql:oracle
     restart: always
-    networks:
-      - spring-cloud-network
     environment:
       - MYSQL_ROOT_PASSWORD=1111
       - MYSQL_DATABASE=db_comment
@@ -85,22 +82,18 @@ services:
     restart: always
     ports:
       - "8761:8761"
-    networks:
-      - spring-cloud-network
 
   # GATEWAY ----------------------------------
   gateway:
     container_name: gateway
     image: gateway:0.0.1-SNAPSHOT
+    environment:
+      - JAVA_OPTS=
+        -DEUREKA_SERVER=http://service-registry:8761/eureka
     restart: always
     ports:
       - "9191:9191"
-    networks:
-      - spring-cloud-network
     depends_on:
       - service-registry
 
-networks:
-  spring-cloud-network:
-    driver: bridge
 

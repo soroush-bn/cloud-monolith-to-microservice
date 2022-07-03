@@ -15,13 +15,13 @@ class GatewayConfig(private val jwtAuthenticationFilter: JwtAuthenticationFilter
     @Bean
     fun routes(builder: RouteLocatorBuilder): RouteLocator? {
         return builder.routes().route(
-            "USER-SERVICE"
+            "user-service"
         ) { r: PredicateSpec ->
             r.path("/user/**")
                 .uri("http://user-service:9002")
         }
             .route(
-                "COMMENT-SERVICE"
+                "comment-service"
             ) { r: PredicateSpec ->
                 r.path("/comment/**").filters { f: GatewayFilterSpec ->
                     f.filter(
@@ -30,7 +30,7 @@ class GatewayConfig(private val jwtAuthenticationFilter: JwtAuthenticationFilter
                 }.uri("http://comment-service:9001")
             }
             .route(
-                "ARTICLE-SERVICE"
+                "article-service"
             ) { r: PredicateSpec ->
                 r.path("/article/**").filters { f: GatewayFilterSpec ->
                     f.filter(
