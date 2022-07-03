@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-configmap
+data:
+  article-db: db_article
+  user-db: db_user
+  comment-db: db_comment
