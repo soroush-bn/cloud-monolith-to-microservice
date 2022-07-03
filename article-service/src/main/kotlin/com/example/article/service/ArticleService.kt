@@ -34,7 +34,7 @@ class ArticleService(
         val article = articleRepository.findByArticleId(id)
         val comments =
 //            todo: change url acording to route
-            restTemplate.getForObject("http://COMMENT-SERVICE/comment/commentsOfArticle?id=" + article.articleId)
+            restTemplate.getForObject("http://comment-service:9001/comment/commentsOfArticle?id=" + article.articleId)
                 ?: Comments(
                     emptyList()
                 )
