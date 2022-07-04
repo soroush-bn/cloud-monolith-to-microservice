@@ -1,132 +1,66 @@
-# cloud-monolith-to-microservice
-
-blog application which provides api to sign up and login for users.
-users can create articles, add comments to articles. 
-
-# Monolith to micro-service 
-
-### list of micro services which are going to be implemented
-
-1- user management (jwt)
+## Second phase of cloud project
 
 
-2- article
 
+Read Readme.md file in branch phase1\_final.
 
-3- user
+### Micro-service application :
 
+#### Development plan :
 
-4- comment
+*   Developing each micro-service
+*   Dockerizing the application
 
-### reasons why each micro service is chosen 
+#### Micro-service development :
 
-article: as articles are more likely to be developed in future -> scalibility requirement
+First, we used [http://start.spring.io/](http://start.spring.io/) to create the micro-service as an application, then we used the reusable codes from the monolith app to develop it.
 
+We specified needed changes and their dependencies due to the need for internal calls. For example, a service registry is needed to discover other services to call them and a gateway is needed to implement JWT and changes are needed in entities as the database of each micro-service is only accessible by itself.
 
-comment: as there might be a lot of comment being posted by users and there we be a lot of load on this service
+Like other micro-services, we used [http://start.spring.io/](http://start.spring.io/) to create gateway and service registry services. For service registry, we used Eureka Server and Eureka Client is used in other micro-services which are defined in their application.yml.
 
+JWT is implemented in the gateway which routes the incoming request to the needed micro-service.
 
-user: for security requirements 
+#### Dockerizing :
 
-### write the files which are going to be used by each micro service
+Now that all micro-services are developed, we can use docker to create images. These images will then be used to be deployed in containers.
 
-article: ArticleHandler.kt, ArticleRepository.kt, Article.kt, TagHandler.kt, TagRepository.kt
+A docker-compose.yml is created to use the images and deploy them in containers. All micro-services and their databases should be declared here with ports and configs.
 
+For databases, we use MySQL.
 
-comment: CommentRepository.kt, Comment.kt
+### How to run :
 
+*   Create images using two possible methods :
 
-user: UserHandler.kt, ProfileHandler.kt, UserRepository.kt, User.kt
+1.  Using Dockerfile in each micro-service
+2.  Using Gradle task BootBuildImage 
 
+*   Run the following command in the directory of the application where docker-compose.yml exists
 
-### diagram of entities and their relations and dependencies to other services as the data bases are apart
-![photo1650656322](https://user-images.githubusercontent.com/45733433/164784145-7d1a2c65-8c8d-4020-ad45-0418f30109b1.jpeg)
+```plaintext
+docker-compose up
+```
 
-### diagram of services and all the internal and external calls
-![photo1650656350](https://user-images.githubusercontent.com/45733433/164784122-bf8718a1-2adf-41e6-a08f-e999385235fb.jpeg)
+*   Use Eureka to check micro-services at [localhost:8761/eureka](localhost:8761/eureka)
+*   Use gateway service to make requests at [localhost:9191/](localhost:9191/)
+*   A postman collection is available at the root of the project.
+*   Note that an image of oracle mysql is needed if not downloaded automatically 
 
+A simple use of an application as an example :
 
-### specify all internal calls like this :
+1.  Register a user
+2.  Retrieve JWT token
+3.  Use JWT token and create an article
+4.  Use JWT token to create a comment
+5.  Use JWT token to get user's articles and comments
 
-    userService --> ArticleService:
-	    where: io/realworld/service/UserService.kt, class: UserService
-	    happened: io/realworld/service/ArticleService.kt, class: ArticleService
-	    code: getUsersArticles(userId):List<Article> 
-	    reason: get users article from article service
-	    solution: GRPC 
+Swagger is enabled for all micro-services and is reachable at [http://localhost:\[service-port\]/swagger-ui/index.html#/](http://localhost:[service-port]/swagger-ui/index.html#/) , replace \[service-port\] to the desired service port.
 
-    userService --> CommentService:
-      	 where: io/realworld/service/UserService.kt, class: UserService
-	happened: io/realworld/service/CommentService.kt, class: CommentService
-        code: val claims = Jwts.parser().setSigningKey(jwtSecret)
-        reason: check validity of user token befor commenting
-        solution: using jwt 
+Micro-services ports :
 
-    ArticleService --> CommentService:
-      	 where: io/realworld/service/ArticleService.kt, class: ArticleService
-	happened: io/realworld/service/CommentService.kt, class: CommentService
-        code: getCommentsOf(articleId):List<Comment>
-        reason: get Comments of specific article via comment service
-        solution: using GPRC
-	
-	
-### list of frameworks used
--kotlin
-
--springframework
-
--jbcrypt
-
--jsonwebtoken
-
--h2
-
--feign-gson
-
--slugify
-
--junit
-
-
-### data base schema and each entity info
-
-
-![photo1650650248](https://user-images.githubusercontent.com/45733433/164769225-b8bf0f4a-440b-41fd-8242-05dc672b82f2.jpeg)
-
-### team plan for developing each service
-
-#### UserService -> @sadeghAbedi
-
-#### CommentService -> @soroush.baghernezhad
-
-#### ArticleService -> @Alireza.dehghan
-
-### database configuration
-
-run mysql server
-
-run below commands to create needed databases :
-
-    create database db_comment;
-    create database db_article;
-    create database db_user;
-
-run below commands to create user springuser with password ThePassword :
-
-    create user 'springuser'@'%' identified by 'ThePassword';
-
-run below commands to give all privileges to newly created user:
-
-    grant all on db_comment.* to 'springuser'@'%';
-    grant all on db_article.* to 'springuser'@'%';
-    grant all on db_user.* to 'springuser'@'%';
-
-to show databases :
-
-    show databases;
-
-to select a database:
-
-    use databasName
-
-
+*   service registry : 8761
+*   gateway : 9191
+*   user-service : 9002
+*   article-service : 9003
+*   comment-service : 9001
