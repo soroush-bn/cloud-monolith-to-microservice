@@ -1,0 +1,607 @@
+{
+  "info": {
+    "_postman_id": "e9a91b08-07de-4391-8665-0fa210e60300",
+    "name": "Cloud Docker",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "17731581"
+  },
+  "item": [
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "register",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"email\",\n    \"password\": \"password\",\n    \"token\": \"token\",\n    \"username\": \"username\",\n    \"bio\": \"bio\",\n    \"image\": \"image\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user/register",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "register"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"username\",\n  \"password\": \"a\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/user/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "test",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/user/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user with comments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwIiwiaWF0IjoxNjU2NzIxODQyLCJleHAiOjE2NTY3MjM2NDJ9.tlpTCDmOJa5OMyHg-jC9XbgGUC883SMa8i5jCtkkuQtKq3r-f-F4pFAvq0WicBout7OiBwf9nApgqy8paYommQ",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/user/userWithComments?id=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "userWithComments"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user with articles",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwIiwiaWF0IjoxNjU2NzIxODQyLCJleHAiOjE2NTY3MjM2NDJ9.tlpTCDmOJa5OMyHg-jC9XbgGUC883SMa8i5jCtkkuQtKq3r-f-F4pFAvq0WicBout7OiBwf9nApgqy8paYommQ",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/user/userWithArticles?id=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "userWithArticles"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "user with articles and comments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwIiwiaWF0IjoxNjU2NzIxODQyLCJleHAiOjE2NTY3MjM2NDJ9.tlpTCDmOJa5OMyHg-jC9XbgGUC883SMa8i5jCtkkuQtKq3r-f-F4pFAvq0WicBout7OiBwf9nApgqy8paYommQ",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/user/userWithArticlesAndComments?id=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "userWithArticlesAndComments"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwIiwiaWF0IjoxNjU2NzIxODQyLCJleHAiOjE2NTY3MjM2NDJ9.tlpTCDmOJa5OMyHg-jC9XbgGUC883SMa8i5jCtkkuQtKq3r-f-F4pFAvq0WicBout7OiBwf9nApgqy8paYommQ",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/user/delete?id=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "delete"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Article",
+      "item": [
+        {
+          "name": "test",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwIiwiaWF0IjoxNjU2NzMzMDMzLCJleHAiOjE2NTY3MzQ4MzN9.H6Z8nb6b9zE9E6HNt-OxKHgXSrMCsX4uGRDJIUjVquJSvridn8ervJaDCM4Tm1cDsLD_vtz73PYXmE5_EJf_6A",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/article/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "article",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "post article",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwIiwiaWF0IjoxNjU2NzMzMDMzLCJleHAiOjE2NTY3MzQ4MzN9.H6Z8nb6b9zE9E6HNt-OxKHgXSrMCsX4uGRDJIUjVquJSvridn8ervJaDCM4Tm1cDsLD_vtz73PYXmE5_EJf_6A",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"slug\": \"string\",\n  \"title\": \"string\",\n  \"description\": \"string\",\n  \"body\": \"string\",\n  \"userId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/article/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "article",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get article",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwIiwiaWF0IjoxNjU2NzMzMDMzLCJleHAiOjE2NTY3MzQ4MzN9.H6Z8nb6b9zE9E6HNt-OxKHgXSrMCsX4uGRDJIUjVquJSvridn8ervJaDCM4Tm1cDsLD_vtz73PYXmE5_EJf_6A",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/article/getArticle?id=4",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "article",
+                "getArticle"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "articles of user",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwIiwiaWF0IjoxNjU2NzMzMDMzLCJleHAiOjE2NTY3MzQ4MzN9.H6Z8nb6b9zE9E6HNt-OxKHgXSrMCsX4uGRDJIUjVquJSvridn8ervJaDCM4Tm1cDsLD_vtz73PYXmE5_EJf_6A",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/article/articlesOfUser?id=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "article",
+                "articlesOfUser"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "article with comments",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwIiwiaWF0IjoxNjU2NzMzMDMzLCJleHAiOjE2NTY3MzQ4MzN9.H6Z8nb6b9zE9E6HNt-OxKHgXSrMCsX4uGRDJIUjVquJSvridn8ervJaDCM4Tm1cDsLD_vtz73PYXmE5_EJf_6A",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/article/articleWithComments?id=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "article",
+                "articleWithComments"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Comment",
+      "item": [
+        {
+          "name": "test",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlhdCI6MTY1NjczODE5OSwiZXhwIjoxNjU2NzM5OTk5fQ.8ilQ-lIyUfFKwC1_Y2IL25x4fVebK3uxBLggsCcXcnEOLJtTpcJVPKiT77wKjQb8Rt85Xb4ovEIhRS04vozoNA",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/comment/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "comment",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "post comment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlhdCI6MTY1NjczODE5OSwiZXhwIjoxNjU2NzM5OTk5fQ.8ilQ-lIyUfFKwC1_Y2IL25x4fVebK3uxBLggsCcXcnEOLJtTpcJVPKiT77wKjQb8Rt85Xb4ovEIhRS04vozoNA",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"body\": \"string\",\n  \"userId\": 1,\n  \"articleId\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/comment/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "comment",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIwIiwiaWF0IjoxNjU2NzIxODQyLCJleHAiOjE2NTY3MjM2NDJ9.tlpTCDmOJa5OMyHg-jC9XbgGUC883SMa8i5jCtkkuQtKq3r-f-F4pFAvq0WicBout7OiBwf9nApgqy8paYommQ",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/comment/",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "comment",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get comment",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlhdCI6MTY1NjczODE5OSwiZXhwIjoxNjU2NzM5OTk5fQ.8ilQ-lIyUfFKwC1_Y2IL25x4fVebK3uxBLggsCcXcnEOLJtTpcJVPKiT77wKjQb8Rt85Xb4ovEIhRS04vozoNA",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/comment/getComment?id=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "comment",
+                "getComment"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "comments of user",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlhdCI6MTY1NjczODE5OSwiZXhwIjoxNjU2NzM5OTk5fQ.8ilQ-lIyUfFKwC1_Y2IL25x4fVebK3uxBLggsCcXcnEOLJtTpcJVPKiT77wKjQb8Rt85Xb4ovEIhRS04vozoNA",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/comment/commentsOfUser?id=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "comment",
+                "commentsOfUser"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "comments of article",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VybmFtZSIsImlhdCI6MTY1NjczODE5OSwiZXhwIjoxNjU2NzM5OTk5fQ.8ilQ-lIyUfFKwC1_Y2IL25x4fVebK3uxBLggsCcXcnEOLJtTpcJVPKiT77wKjQb8Rt85Xb4ovEIhRS04vozoNA",
+                "type": "text"
+              }
+            ],
+            "url": {
+              "raw": "{{url}}/comment/commentsOfArticle?id=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "comment",
+                "commentsOfArticle"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/comment/delete?id=1",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "comment",
+                "delete"
+              ],
+              "query": [
+                {
+                  "key": "id",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": "localhost:9191"
+    }
+  ]
+}

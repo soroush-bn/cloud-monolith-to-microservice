@@ -22,8 +22,8 @@ class UserController(@Autowired val service: UserService) {
 
     @GetMapping
     fun getMain(model: Model): String {
-        model["title"] = "salam sag"
-        return "sag"
+        model["title"] = "test"
+        return "test"
     }
 
     @PostMapping("register")
@@ -38,20 +38,20 @@ class UserController(@Autowired val service: UserService) {
     @PatchMapping
     fun updateUser(@RequestBody user: UserEntity): UserEntity = service.updateUser(user)
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("delete")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun deleteUser(@PathVariable id: Long): Unit = service.deleteUser(id)
+    fun deleteUser(@RequestParam(name = "id") userId: Long): Unit = service.deleteUser(userId)
 
-    @GetMapping("userWithComments/{id}")
-    fun getUserWithComments(@PathVariable("id") userId: Long): UserAndCommentResponse =
+    @GetMapping("userWithComments")
+    fun getUserWithComments(@RequestParam(name = "id") userId: Long): UserAndCommentResponse =
         service.getUserWithComments(userId)
 
-    @GetMapping("userWithArticles/{id}")
-    fun getUserWithArticles(@PathVariable("id") userId: Long): UserAndArticleResponse =
+    @GetMapping("userWithArticles")
+    fun getUserWithArticles(@RequestParam(name = "id") userId: Long): UserAndArticleResponse =
         service.getUserWithArticles(userId)
 
-    @GetMapping("userWithArticlesAndComments/{id}")
-    fun getUserWithArticlesAndComments(@PathVariable("id") userId: Long): UserWithCommentsAndArticles =
+    @GetMapping("userWithArticlesAndComments")
+    fun getUserWithArticlesAndComments(@RequestParam(name = "id") userId: Long): UserWithCommentsAndArticles =
         service.getUserWithArticlesAndComments(userId)
 
     @ExceptionHandler(NoSuchElementException::class)
