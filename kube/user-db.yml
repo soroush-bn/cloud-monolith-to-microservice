@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: article-db-deployment
+  name: user-db-deployment
   labels:
-    app: article-db
+    app: user-db
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: article-db
+      app: user-db
   template:
     metadata:
       labels:
-        app: article-db
+        app: user-db
     spec:
       containers:
-        - name: article-db
+        - name: user-db
           image: mysql:oracle
           resources:
             requests:
@@ -36,7 +36,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: mysql-configmap
-                  key: article-db
+                  key: user-db
             - name: MYSQL_USER
               valueFrom:
                 secretKeyRef:
@@ -48,21 +48,21 @@ spec:
                   name: mysql-secret
                   key: password
           volumeMounts:
-            - name: article-db-storage
+            - name: user-db-storage
               mountPath: /var/lib/mysql
       volumes:
-        - name: article-db-storage
+        - name: user-db-storage
           persistentVolumeClaim:
-            claimName: article-db-data
+            claimName: user-db-data
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: article-db
+  name: user-db
 spec:
   selector:
-    app: article-db
+    app: user-db
   ports:
     - protocol: TCP
       port: 3306

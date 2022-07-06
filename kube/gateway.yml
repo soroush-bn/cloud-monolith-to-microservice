@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: article-app-deployment
+  name: gateway-deployment
   labels:
-    app: article-app
+    app: gateway
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: article-app
+      app: gateway
   template:
     metadata:
       labels:
-        app: article-app
+        app: gateway
     spec:
       containers:
-        - name: article-app
-          image: article-service:0.0.1-SNAPSHOT
+        - name: gateway
+          image: gateway:0.0.1-SNAPSHOT
           resources:
             requests:
               memory: 756Mi
@@ -25,19 +25,22 @@ spec:
               memory: 756Mi
               cpu: "2"
           ports:
-            - containerPort: 9003
+            - containerPort: 9191
           env:
             - name: JAVA_OPTS
               value: -DEUREKA_SERVER=http://service-registry:8761/eureka
+
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: article-app-service
+  name: gateway-service
 spec:
+  type: NodePort
   selector:
-    app: article-app
+    app: gateway
   ports:
     - protocol: TCP
-      port: 9003
-      targetPort: 9003
+      port: 9191
+      targetPort: 9191
+      nodePort: 30000
